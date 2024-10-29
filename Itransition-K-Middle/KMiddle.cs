@@ -2,15 +2,15 @@
 {
     public class KMiddle
     {
-        public Point[] Points { get; init; } = [];
-        public Point[] Centroids { get; private set; } = [];
+        public Point3D[] Points { get; init; } = [];
+        public Point3D[] Centroids { get; private set; } = [];
         public int CountClusters { get; init; } = 0;
 
-        public KMiddle(Point[] points, int countClusters, int countUpdates) 
+        public KMiddle(Point3D[] points, int countClusters, int countUpdates) 
         {
             Points = points;
             CountClusters = countClusters;
-            Centroids = new Point[countClusters];
+            Centroids = new Point3D[countClusters];
 
             InitializeCentroids();
 
@@ -27,20 +27,21 @@
             for (int i = 0; i < CountClusters; i++)
             {
                 var index = rand.Next(Points.Length);
-                var centroidPoint = new Point(Points[index].X, Points[index].Y);
+                var centroidPoint = new Point3D(Points[index].X, Points[index].Y, Points[index].Z);
 
                 Centroids[i] = centroidPoint;
             }
         }
 
-        private Point CalculateAverage(List<Point> points)
+        private Point3D CalculateAverage(List<Point3D> points)
         {
             var sumX = points.Sum(p => p.X);
             var sumY = points.Sum(p => p.Y);
+            var sumZ = points.Sum(p => p.Y);
 
             var count = points.Count;
 
-            return new Point(sumX / count, sumY / count);
+            return new Point3D(sumX / count, sumY / count, sumZ / count);
         }
 
         private void UpdateCentroids()
@@ -58,7 +59,7 @@
             }
         }
 
-        private int GetNearestCentroidToTargetPoint(Point point)
+        private int GetNearestCentroidToTargetPoint(Point3D point)
         {
             var minDistance = double.MaxValue;
             var nearestIndex = 0;
@@ -77,7 +78,9 @@
             return nearestIndex;
         }
 
-        private double GetDistance(Point firstPoint, Point secondPoint) 
-            => Math.Sqrt(Math.Pow(firstPoint.X - secondPoint.X, 2) + Math.Pow(firstPoint.Y - secondPoint.Y, 2));
+        private double GetDistance(Point3D firstPoint, Point3D secondPoint) 
+            => Math.Sqrt(Math.Pow(firstPoint.X - secondPoint.X, 2) + 
+               Math.Pow(firstPoint.Y - secondPoint.Y, 2) +
+               Math.Pow(firstPoint.Z - secondPoint.Z, 2));
     }
 }

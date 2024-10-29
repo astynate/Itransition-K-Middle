@@ -2,11 +2,11 @@
 {
     partial class GraphForm : Form
     {
-        private readonly Point[][] _clusters = [];
+        private readonly Point3D[][] _clusters = [];
 
         private readonly Color[] _colors = { Color.Red, Color.Blue, Color.Green, Color.Yellow, Color.Purple };
 
-        public GraphForm(Point[][] points)
+        public GraphForm(Point3D[][] points)
         {
             this._clusters = points;
 

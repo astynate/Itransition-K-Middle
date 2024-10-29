@@ -13,7 +13,7 @@ namespace Itransition_K_Middle
             var maxPointsInClaster = 10;
             var clusterDistance = 150;
 
-            var points = new Point[countClasters][];
+            var points = new Point3D[countClasters][];
             var random = new Random();
 
             var clusterOffsets = new int[countClasters];
@@ -35,14 +35,19 @@ namespace Itransition_K_Middle
             {
                 var pointsInCluster = random.Next(minPointsInClaster, maxPointsInClaster + 1);
                 
-                points[i] = new Point[pointsInCluster];
+                points[i] = new Point3D[pointsInCluster];
 
                 for (var j = 0; j < pointsInCluster; j++)
                 {
-                    var offsetX = (int)(random.NextDouble() * clusterSize / 2);
-                    var offsetY = (int)(random.NextDouble() * clusterSize / 2);
+                    var offsetX = (float)(random.NextDouble() * clusterSize / 2);
+                    var offsetY = (float)(random.NextDouble() * clusterSize / 2);
+                    var offsetZ = (float)(random.NextDouble() * clusterSize / 2);
 
-                    points[i][j] = new Point(offsetX + clusterOffsets[i], offsetY + clusterOffsets[i]);
+                    var pointX = offsetX + clusterOffsets[i];
+                    var pointY = offsetY + clusterOffsets[i];
+                    var pointZ = offsetZ + clusterOffsets[i];
+
+                    points[i][j] = new Point3D(pointX, pointY, pointZ);
                 }
             }
 
