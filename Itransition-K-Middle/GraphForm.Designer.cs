@@ -11,7 +11,7 @@
             this._clusters = points;
 
             this.Text = "Simple Graph Drawing";
-            this.Size = new Size(400, 400);
+            this.Size = new Size(800, 800);
             this.Paint += new PaintEventHandler(DrawGraph);
         }
 
@@ -26,6 +26,13 @@
                 {
                     e.Graphics.FillEllipse(new SolidBrush(clusterColor), point.X - 8, point.Y - 8, 16, 16);
                 }
+            }
+
+            var kMiddle = new KMiddle(_clusters.SelectMany(x => x).ToArray(), 3, 100);
+
+            for (var i = 0; i < kMiddle.Centroids.Length; i++)
+            {
+                e.Graphics.FillEllipse(new SolidBrush(_colors[4]), kMiddle.Centroids[i].X - 20, kMiddle.Centroids[i].Y - 20, 40, 40);
             }
         }
     }

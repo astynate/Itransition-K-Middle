@@ -7,10 +7,10 @@ namespace Itransition_K_Middle
         {
             var countClasters = 3;
             var leftBorder = 50;
-            var rightBorder = 500;
-            var clusterSize = 250;
+            var rightBorder = 700;
+            var clusterSize = 200;
             var minPointsInClaster = 7;
-            var maxPointsInClaster = 20;
+            var maxPointsInClaster = 10;
             var clusterDistance = 150;
 
             var points = new Point[countClasters][];
